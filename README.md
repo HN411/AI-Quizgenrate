@@ -1,145 +1,236 @@
-# QuizCraft AI
+# AI-Quizgenrate 🎓
 
-QuizCraft AI is an AI-powered quiz generation platform that helps users create quizzes on different subjects and topics. It uses Google's Gemini API to generate questions, multiple-choice answers, correct answers, and explanations.
+**Turn learning materials into quizzes with AI.**
 
-Users can enter a topic or provide their own notes to generate quizzes tailored to their learning needs.
+AI-Quizgenrate is an AI-powered quiz generation web application designed to help learners create practice quizzes from topics and study materials.
 
-## Features
+🌐 **Live Website:** [https://ai-quizgenrate-production.up.railway.app/](https://ai-quizgenrate-production.up.railway.app/)
 
-- Generate quizzes from any topic.
-- Create quizzes from custom notes and text.
-- Choose the number of questions and difficulty level.
-- Generate multiple-choice questions with answer explanations.
-- Research topics using Google Search grounding when available.
-- Review previous quizzes stored in the browser.
-- Track quiz results and review answers.
-- Responsive interface for desktop and mobile devices.
+📦 **GitHub Repository:** [https://github.com/HN411/AI-Quizgenrate](https://github.com/HN411/AI-Quizgenrate)
 
-## Tech Stack
+---
 
-- **Frontend:** React, Vite, CSS
-- **Backend:** Node.js, Express
-- **AI Integration:** Google Gemini API
-- **Deployment:** Railway
+## 📖 Table of Contents
 
-## Requirements
+- [Overview](#-overview)
+- [Features](#-features)
+- [Live Demo](#-live-demo)
+- [Technology Stack](#-technology-stack)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#-environment-variables)
+- [Run Locally](#-run-locally)
+- [Deployment](#-deployment)
+- [Project Structure](#-project-structure)
+- [Security](#-security)
+- [Limitations](#-limitations)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-Before running the project, make sure you have:
+---
 
-- Node.js 20 or later
-- npm
-- A Google Gemini API key
-- A Railway account for deployment
+## 🚀 Overview
 
-## Installation
+AI-Quizgenrate helps students and self-learners practice what they study by generating quizzes with the help of Google's Gemini AI.
 
-Clone the repository:
+Instead of manually writing every question, users can provide a topic or study material and use the application to generate a quiz for practice.
+
+The project combines a React-based frontend with a Node.js backend to provide an interactive learning experience.
+
+## ✨ Features
+
+- **AI-powered quiz generation:** Generate quizzes using Google's Gemini AI.
+- **Topic-based quizzes:** Create quizzes from a subject or topic.
+- **Study-material support:** Generate quizzes from notes or supplied text, where supported by the application.
+- **Interactive learning:** Answer generated questions through the web interface.
+- **Quiz history:** Keep track of quizzes in the browser's local storage.
+- **Responsive interface:** Use the application on supported desktop and mobile browsers.
+- **Online access:** Use the deployed website without installing the project locally.
+
+> Features depend on the current application implementation and successful access to the configured AI service.
+
+## 🌐 Live Demo
+
+Try the application here:
+
+**[Open AI-Quizgenrate](https://ai-quizgenrate-production.up.railway.app/)**
+
+The website is hosted on Railway.
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| React | User interface |
+| Vite | Frontend development and production builds |
+| Node.js | JavaScript runtime |
+| Express | Backend API and web server |
+| Google Gemini API | AI-powered quiz generation |
+| Google Gen AI SDK | Communication with Gemini |
+| Browser local storage | Local quiz-history persistence |
+| Railway | Application hosting and deployment |
+| Git and GitHub | Source control and project hosting |
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+To run this project locally, install:
+
+- [Node.js](https://nodejs.org/) — use a version compatible with the project's dependencies.
+- npm — included with Node.js.
+- [Git](https://git-scm.com/) — optional, for cloning the repository.
+- A Google Gemini API key from [Google AI Studio](https://aistudio.google.com/).
+
+### 1. Clone the repository
+
+Open a terminal and run:
 
 ```bash
-git clone YOUR_REPOSITORY_URL
-cd quizcraft-ai
+git clone https://github.com/HN411/AI-Quizgenrate.git
+cd AI-Quizgenrate
 ```
 
-Install the dependencies:
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
+### 3. Configure environment variables
 
-## Run Locally
+Create a `.env` file in the project root, using `.env.example` as a reference if it is available.
 
-Start the development environment:
+Add your Gemini API configuration:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-3.8-flash
+```
+
+Replace `your_gemini_api_key_here` with your own API key.
+
+The model shown above is the project's configured default. If it is unavailable to your Google AI project, select a supported model ID and configure it accordingly.
+
+**Never commit your real `.env` file or API key to GitHub.**
+
+### 4. Start the application
+
+To start the frontend and backend together in development mode, run:
 
 ```bash
 npm run dev:full
 ```
 
-Open the local URL displayed in your terminal.
+If this command is unavailable in your version of the project, inspect the scripts in `package.json` and follow the available development commands.
 
-## Production Build
-
-Build the frontend:
+For production, build the frontend and start the server:
 
 ```bash
 npm run build
-```
-
-Start the application:
-
-```bash
 npm start
 ```
 
-## API Endpoints
+The production server must be able to access the generated `dist` directory and the required environment variables.
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/health` | Checks server status and API configuration |
-| POST | `/api/generate-quiz` | Generates a quiz using the Gemini API |
+## 🔐 Environment Variables
 
-### Generate a Quiz
+| Variable | Description |
+|---|---|
+| `GEMINI_API_KEY` | API key used to access Google Gemini |
+| `GEMINI_MODEL` | Gemini model ID used for quiz generation |
+| `PORT` | Port supplied by the hosting platform, such as Railway |
 
-Send a POST request to `/api/generate-quiz` with a JSON body containing the topic, question count, difficulty, and any optional notes.
+Keep all secret values private. The production API key should be configured in Railway's service variables rather than hardcoded into frontend code.
 
-Example:
+## 🚢 Deployment
 
-```json
-{
-  "topic": "Photosynthesis",
-  "count": 5,
-  "difficulty": "medium",
-  "notes": ""
-}
-```
+The live application is deployed on Railway.
 
-The API returns the generated quiz in JSON format. The exact response structure is defined by the backend.
+### Deploy your own instance
 
-## Deployment on Railway
+1. Fork or clone the GitHub repository.
+2. Create a project in [Railway](https://railway.com/).
+3. Connect your GitHub repository.
+4. Configure the required environment variables in the Railway service.
+5. Build the application using:
 
-1. Push the project to a GitHub repository.
-2. Sign in to [Railway](https://railway.com/).
-3. Create a new project and deploy from your GitHub repository.
-4. Add `GEMINI_API_KEY` and `GEMINI_MODEL` in the service's environment variables.
-5. Deploy the application and check the deployment logs.
-6. Generate a public domain under the service's networking settings.
+   ```bash
+   npm install && npm run build
+   ```
 
-After deployment, open your public domain and test quiz generation.
+6. Start the production server using:
 
-Check the health endpoint:
+   ```bash
+   npm start
+   ```
 
-```text
-https://YOUR-RAILWAY-DOMAIN/api/health
-```
+7. Generate a public domain in Railway's networking settings.
+8. Open the domain and test quiz generation.
 
-Replace `YOUR-RAILWAY-DOMAIN` with your actual Railway domain.
+Check the Railway deployment logs if the build, server startup, or AI requests fail.
 
-## Project Structure
+## 📁 Project Structure
+
+The main project files are organized as follows:
 
 ```text
-quizcraft-ai/
-├── server/
-│   └── index.js
+AI-Quizgenrate/
 ├── src/
 │   ├── components/
 │   ├── lib/
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── styles.css
+├── server/
+│   └── index.js
 ├── index.html
 ├── package.json
-├── vite.config.js
 ├── railway.json
+├── vite.config.js
 ├── .env.example
+├── .gitignore
 └── README.md
 ```
 
-## Data and Privacy
+The exact contents may vary as the project develops.
 
-Quiz history and related local preferences are stored in the user's browser. Clearing browser data may remove this information. History is not automatically synchronized across devices.
+## 🔒 Security
 
-The Gemini API key must remain on the server and should be configured through environment variables. Avoid submitting private or confidential information in quiz notes.
+- Store API keys in environment variables.
+- Never publish `.env` files containing credentials.
+- Keep `.env.example` limited to placeholder values.
+- Do not expose private API keys in React components or browser-delivered JavaScript.
+- Restrict and rotate API keys if they are accidentally exposed.
+- Review API usage limits and billing before making the application available to many users.
 
-## License
+## ⚠️ Limitations
 
-Add a license to this repository if you intend to distribute the project publicly.
+- AI-generated questions may occasionally contain mistakes. Review answers and explanations before relying on them for important assessments.
+- Quiz generation requires a valid Gemini API configuration and available API quota.
+- Quiz history is stored locally in the browser in the current implementation; it is not automatically synchronized across devices.
+- Cloud-based user accounts and synchronized history should not be assumed to be available unless implemented separately.
+- Hosting and AI API usage may be subject to service limits and charges.
+
+## 🤝 Contributing
+
+Contributions, bug reports, and suggestions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes.
+4. Test your changes locally.
+5. Submit a pull request with a clear description of the improvements.
+
+For substantial changes, describe the problem being solved and include steps to reproduce any bug fixes.
+
+## 📄 License
+
+No license has been specified in this repository by this README.
+
+Before distributing or accepting reuse of the code, choose an appropriate license and add a `LICENSE` file. Until a license is added, do not assume that the project is released under an open-source license.
+
+---
+
+**Built to make learning more interactive with AI.**
+
+🌐 [Live Website](https://ai-quizgenrate-production.up.railway.app/) · 💻 [GitHub Repository](https://github.com/HN411/AI-Quizgenrate)
